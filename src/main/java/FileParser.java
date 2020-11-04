@@ -3,24 +3,20 @@ import model.Word;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileParser {
     public List<Sentence> parseText() {
-        String filePath = "C:\\Users\\zajaw\\IdeaProjects\\InvictaExercise\\src\\main\\resources\\text.txt";
+        String filePath = ".\\src\\main\\resources\\text.txt";
+
+        return parseSentencesAndWords(getTextFromFile(filePath));
+    }
 
 
-        String contents = null;
-        try {
-            contents = new String(Files.readAllBytes(Paths.get(filePath)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        String[] sentences = contents.split("\\.");
+    private List<Sentence> parseSentencesAndWords(String text) {
+        String[] sentences = text.split("\\.");
 
         List<Sentence> sentenceList = new ArrayList<>();
 
@@ -28,27 +24,25 @@ public class FileParser {
             String[] words = sentence.split("([^a-zA-Z']+)'*\\1*");
 
             List<Word> wordsList = new ArrayList<>();
-            for (String word : words) {
-                Word ble = new Word(word);
-                wordsList.add(ble);
+            for (String w : words) {
+                Word word = new Word(w);
+                wordsList.add(word);
             }
 
             System.out.println(wordsList.toString());
             sentenceList.add(new Sentence(wordsList));
 
-
-            //  String replace = sentence.replaceAll("\\s+", " ");
-            //  String replace1 = replace.replaceAll("”|“","");
-            //  String finalSentence = replace1.trim();
-            //  clearedSentences.add(finalSentence);
         }
-
-
-//        for (String clearedSentence : clearedSentences) {
-//            System.out.println(clearedSentence);
-//        }
-
-
         return sentenceList;
+    }
+
+    private String getTextFromFile(String filePath) {
+        String contents = null;
+        try {
+            contents = new String(Files.readAllBytes(Path.of(filePath).toAbsolutePath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contents;
     }
 }

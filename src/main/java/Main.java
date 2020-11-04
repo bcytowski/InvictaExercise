@@ -1,6 +1,6 @@
-import model.CsvConverter;
 import model.Sentence;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -9,10 +9,10 @@ public class Main {
         FileParser fileParser = new FileParser();
         List<Sentence> sentenceList = fileParser.parseText();
 
-        XmlConverter xmlConverter = new XmlConverter();
-        xmlConverter.generateXML(sentenceList);
+        Converter xmlConverter = new XmlConverter();
+        xmlConverter.generate(sentenceList);
 
-        CsvConverter csvConverter = new CsvConverter();
-        csvConverter.generateCSV(sentenceList);
+        Converter csvConverter = new CsvConverter();
+        csvConverter.generate(sentenceList);
     }
 }
