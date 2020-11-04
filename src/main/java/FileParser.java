@@ -21,7 +21,8 @@ public class FileParser {
         List<Sentence> sentenceList = new ArrayList<>();
 
         for (String sentence : sentences) {
-            String[] words = sentence.split("([^a-zA-Z']+)'*\\1*");
+//            System.out.println(sentence);
+            String[] words = sentence.toLowerCase().trim().split("\\W+");
 
             List<Word> wordsList = new ArrayList<>();
             for (String w : words) {
@@ -29,7 +30,7 @@ public class FileParser {
                 wordsList.add(word);
             }
 
-            System.out.println(wordsList.toString());
+//            System.out.println(wordsList.toString());
             sentenceList.add(new Sentence(wordsList));
 
         }
