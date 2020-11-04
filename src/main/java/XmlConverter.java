@@ -1,4 +1,5 @@
 import model.Sentence;
+import model.WrapperClass;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -10,21 +11,19 @@ import java.util.List;
 public class XmlConverter implements Converter {
     public void generate(List<Sentence> sentenceList) throws JAXBException {
 
-        Sentence sentence = sentenceList.get(1);
 
         try {
 
-                File file = new File("C:\\Users\\zajaw\\IdeaProjects\\InvictaExercise\\src\\main\\resources\\file.xml");
-                JAXBContext jaxbContext = JAXBContext.newInstance(Sentence.class);
-                Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-                // output pretty printed
-                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            File file = new File("C:\\Users\\zajaw\\IdeaProjects\\InvictaExercise\\src\\main\\resources\\file.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Sentence.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 
-                jaxbMarshaller.marshal(sentence, file);
-                jaxbMarshaller.marshal(sentence, System.out);
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
+            WrapperClass wrapperClass = new WrapperClass(sentenceList);
+            jaxbMarshaller.marshal(wrapperClass, file);
+            jaxbMarshaller.marshal(wrapperClass, System.out);
 
 
         } catch (JAXBException e) {

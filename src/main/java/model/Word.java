@@ -1,11 +1,11 @@
 package model;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlValue;
 
 
 public class Word {
 
-    @XmlElement
+    @XmlValue
     private String word;
 
     public Word(String word) {

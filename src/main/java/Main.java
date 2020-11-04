@@ -7,8 +7,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws JAXBException {
         // todo pass argument with file path
+        String filePath = ".\\src\\main\\resources\\text.txt";
         FileParser fileParser = new FileParser();
-        List<Sentence> sentenceList = fileParser.parseText();
+        List<Sentence> sentenceList = fileParser.parseText(filePath);
         for (Sentence sentence : sentenceList) {
             System.out.println(sentence);
         }

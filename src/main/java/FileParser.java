@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileParser {
-    public List<Sentence> parseText() {
-        String filePath = ".\\src\\main\\resources\\text.txt";
+    public List<Sentence> parseText(String filePath) {
 
         return parseSentencesAndWords(getTextFromFile(filePath));
     }
@@ -21,7 +20,7 @@ public class FileParser {
         List<Sentence> sentenceList = new ArrayList<>();
 
         for (String sentence : sentences) {
-//            System.out.println(sentence);
+
             String[] words = sentence.toLowerCase().trim().split("\\W+");
 
             List<Word> wordsList = new ArrayList<>();
@@ -30,7 +29,7 @@ public class FileParser {
                 wordsList.add(word);
             }
 
-//            System.out.println(wordsList.toString());
+
             sentenceList.add(new Sentence(wordsList));
 
         }

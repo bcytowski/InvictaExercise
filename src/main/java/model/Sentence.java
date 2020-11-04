@@ -2,30 +2,30 @@ package model;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
-
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso(WrapperClass.class)
 public class Sentence {
 
-    private List<Word> sentence;
+    @XmlElement(name = "word")
+    private List<Word> words;
 
 
-    public Sentence(List<Word> sentence) {
-        this.sentence = sentence;
+    public Sentence(List<Word> words) {
+        this.words = words;
     }
 
     public Sentence(){
 
     }
 
-    public List<Word> getSentence() {
-        return sentence;
+    public List<Word> getWords() {
+        return words;
     }
 
     @Override
     public String toString() {
         return "Sentence{" +
-                "sentence=" + sentence +
+                "sentence=" + words +
                 '}';
     }
 }
