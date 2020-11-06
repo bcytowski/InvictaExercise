@@ -6,7 +6,7 @@ import java.util.List;
 @XmlSeeAlso(WrapperClass.class)
 public class Sentence {
 
-    @XmlElement(name = "word")
+
     private List<Word> words;
 
 
@@ -18,6 +18,10 @@ public class Sentence {
 
     }
 
+    public void setWords(List<Word> words) {
+        this.words = words;
+    }
+    @XmlElement(name = "word")
     public List<Word> getWords() {
         return words;
     }

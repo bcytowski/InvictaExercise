@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlValue;
 
 public class Word {
 
-    @XmlValue
+
     private String word;
 
     public Word(String word) {
@@ -14,6 +14,10 @@ public class Word {
 
     public Word(){
 
+    }
+    @XmlValue
+    public String getWord() {
+        return word;
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class XmlConverter implements Converter {
-    public void generate(List<Sentence> sentenceList) throws JAXBException {
+    public void generate(WrapperClass sentenceListWrapper) {
 
 
         try {
@@ -22,9 +22,8 @@ public class XmlConverter implements Converter {
 
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            WrapperClass wrapperClass = new WrapperClass(sentenceList);
-            jaxbMarshaller.marshal(wrapperClass, file);
-            jaxbMarshaller.marshal(wrapperClass, System.out);
+            jaxbMarshaller.marshal(sentenceListWrapper, file);
+            jaxbMarshaller.marshal(sentenceListWrapper, System.out);
 
 
         } catch (JAXBException | IOException e) {

@@ -1,22 +1,24 @@
 import model.Sentence;
+import model.WrapperClass;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws JAXBException {
+    public static void main(String[] args) throws IOException {
         // todo pass argument with file path
         String filePath = ".\\src\\main\\resources\\text.txt";
         FileParser fileParser = new FileParser();
-        List<Sentence> sentenceList = fileParser.parseText(filePath);
-        for (Sentence sentence : sentenceList) {
+        WrapperClass sentenceListWrapper = fileParser.parseAndSortText(filePath);
+
+        for (Sentence sentence : sentenceListWrapper.getSentenceList()) {
             System.out.println(sentence);
         }
         Converter xmlConverter = new XmlConverter();
-        xmlConverter.generate(sentenceList);
+        xmlConverter.generate(sentenceListWrapper);
 
-//        Converter csvConverter = new CsvConverter();
-//        csvConverter.generate(sentenceList);
+        Converter csvConverter = new CsvConverter();
+        csvConverter.generate(sentenceListWrapper);
     }
 }

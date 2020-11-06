@@ -1,23 +1,25 @@
 import model.Sentence;
 import model.Word;
+import model.WrapperClass;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileParser {
-    public List<Sentence> parseText(String filePath) {
-
-        return parseSentencesAndWords(getTextFromFile(filePath));
+    public WrapperClass parseAndSortText(String filePath) {
+        return parseAndSort(getTextFromFile(filePath));
     }
 
-
-    private List<Sentence> parseSentencesAndWords(String text) {
+    private WrapperClass parseAndSort(String text) {
         String[] sentences = text.split("\\.");
 
         List<Sentence> sentenceList = new ArrayList<>();
+        int longestSentenceLength = 0;
 
         for (String sentence : sentences) {
 
@@ -25,15 +27,26 @@ public class FileParser {
 
             List<Word> wordsList = new ArrayList<>();
             for (String w : words) {
-                Word word = new Word(w);
-                wordsList.add(word);
+                if (!w.isBlank()) {
+                    Word word = new Word(w);
+                    wordsList.add(word);
+                }
             }
-
-
-            sentenceList.add(new Sentence(wordsList));
-
+            if (!wordsList.isEmpty()) {
+                List<Word> wordList = sortWords(wordsList);
+                sentenceList.add(new Sentence(wordList));
+                if (wordList.size() > longestSentenceLength) {
+                    longestSentenceLength = wordList.size();
+                }
+            }
         }
-        return sentenceList;
+        return new WrapperClass(sentenceList, longestSentenceLength);
+    }
+
+    private List<Word> sortWords(List<Word> wordsList) {
+        return wordsList.stream()
+                .sorted(Comparator.comparing(o -> o.getWord().toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     private String getTextFromFile(String filePath) {
@@ -45,4 +58,5 @@ public class FileParser {
         }
         return contents;
     }
+
 }
