@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class XmlConverter implements Converter {
@@ -14,7 +15,7 @@ public class XmlConverter implements Converter {
 
         try {
 
-            File file = new File("C:\\Users\\zajaw\\IdeaProjects\\InvictaExercise\\src\\main\\resources\\file.xml");
+            File file = new File(".\\src\\main\\resources\\file.xml").getCanonicalFile();
             JAXBContext jaxbContext = JAXBContext.newInstance(Sentence.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -26,7 +27,7 @@ public class XmlConverter implements Converter {
             jaxbMarshaller.marshal(wrapperClass, System.out);
 
 
-        } catch (JAXBException e) {
+        } catch (JAXBException | IOException e) {
             e.printStackTrace();
         }
     }

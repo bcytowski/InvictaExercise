@@ -21,7 +21,7 @@ public class FileParser {
 
         for (String sentence : sentences) {
 
-            String[] words = sentence.toLowerCase().trim().split("\\W+");
+            String[] words = sentence.split("\\W+");
 
             List<Word> wordsList = new ArrayList<>();
             for (String w : words) {
