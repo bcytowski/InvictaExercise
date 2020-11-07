@@ -5,11 +5,11 @@ import java.io.*;
 import java.util.stream.Collectors;
 
 public class CsvConverter implements Converter {
-    public void generate(WrapperClass sentenceListWrapper) throws IOException {
+    public void generate(WrapperClass sentenceListWrapper, String filePath) throws IOException {
 
 
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(".\\src\\main\\resources\\csv-output.csv"), "utf-8"))) {
+                new FileOutputStream(filePath), "utf-8"))) {
 
             String sb = buildFirstLine(sentenceListWrapper);
 

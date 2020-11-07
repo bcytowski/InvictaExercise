@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface Converter {
-    void generate(WrapperClass sentenceListWrapper) throws IOException;
+    void generate(WrapperClass sentenceListWrapper, String filePath) throws IOException;
 }
