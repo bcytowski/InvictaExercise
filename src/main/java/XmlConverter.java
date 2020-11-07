@@ -15,7 +15,7 @@ public class XmlConverter implements Converter {
 
         try {
 
-            File file = new File(".\\src\\main\\resources\\file.xml").getCanonicalFile();
+            File file = new File(".\\src\\main\\resources\\xml-output.xml").getCanonicalFile();
             JAXBContext jaxbContext = JAXBContext.newInstance(Sentence.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 

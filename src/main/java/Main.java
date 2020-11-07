@@ -8,7 +8,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException {
         // todo pass argument with file path
-        String filePath = ".\\src\\main\\resources\\text.txt";
+        String filePath = ".\\src\\main\\resources\\input-text.txt";
         FileParser fileParser = new FileParser();
         WrapperClass sentenceListWrapper = fileParser.parseAndSortText(filePath);
 

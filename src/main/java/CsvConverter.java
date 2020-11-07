@@ -1,13 +1,15 @@
+import model.Word;
 import model.WrapperClass;
 
 import java.io.*;
+import java.util.stream.Collectors;
 
 public class CsvConverter implements Converter {
     public void generate(WrapperClass sentenceListWrapper) throws IOException {
 
 
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(".\\src\\main\\resources\\file.csv"), "utf-8"))) {
+                new FileOutputStream(".\\src\\main\\resources\\csv-output.csv"), "utf-8"))) {
 
             String sb = buildFirstLine(sentenceListWrapper);
 
@@ -15,9 +17,10 @@ public class CsvConverter implements Converter {
 
             writer.write("\n");
 
-            for (int i = 0; i < sentenceListWrapper.getSentenceList().size(); i++) {
 
-            }
+            String s = buildRestOfTheLines(sentenceListWrapper);
+
+            writer.write(s);
 
         }
 
@@ -30,6 +33,16 @@ public class CsvConverter implements Converter {
             sb.append(", ");
             sb.append("Word ");
             sb.append(i);
+        }
+        return sb.toString();
+    }
+
+    private String buildRestOfTheLines(WrapperClass sentenceListWrapper) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < sentenceListWrapper.getSentenceList().size(); i++) {
+            sb.append("Sentence ");
+            sb.append(i + 1).append(", ").append(sentenceListWrapper.getSentenceList().get(i).getWords().stream()
+                    .map(Word::toString).collect(Collectors.joining(", "))).append("\n");
         }
         return sb.toString();
     }
